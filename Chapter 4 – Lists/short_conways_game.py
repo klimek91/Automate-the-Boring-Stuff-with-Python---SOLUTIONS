@@ -2,8 +2,8 @@ import random, time, copy
 
 width = 60
 height = 20
-
-nextCells = []
+step = 0
+board = []
 for x in range(width):
     column = []
     for y in range(height):
@@ -11,8 +11,39 @@ for x in range(width):
             column.append("#")
         else:
             column.append(' ')
-    nextCells.append(column)
+    board.append(column)
 
-#test
-for x in nextCells:
-    print(x)
+
+currentBoard = copy.deepcopy(board)
+
+def printBoard(board):
+    for x in range(width):
+        for y in range(height):
+            print(board[x][y], end='')
+        print()
+
+
+for x in range(width):
+    for y in range(height):
+        leftCoord = (x-1) % width
+        rightCoord = (x+1) % width
+        aboveCoord = (y-1) % height
+        belowCoord = (y+1) % height
+
+        numNeighbors = 0
+        if currentBoard[leftCoord][aboveCoord] == '#':
+            numNeighbors +=1
+        if currentBoard[x][aboveCoord] == '#':
+            numNeighbors +=1
+        if currentBoard[rightCoord][aboveCoord] == '#':
+            numNeighbors += 1
+        if currentBoard[rightCoord][y] == '#':
+            numNeighbors += 1
+        if currentBoard[rightCoord][belowCoord] == '#':
+            numNeighbors += 1
+        if currentBoard[x][belowCoord] == '#':
+            numNeighbors += 1
+        if currentBoard[leftCoord][belowCoord] == '#':
+            numNeighbors += 1
+        if currentBoard[leftCoord][y] == '#':
+            numNeighbors += 1
