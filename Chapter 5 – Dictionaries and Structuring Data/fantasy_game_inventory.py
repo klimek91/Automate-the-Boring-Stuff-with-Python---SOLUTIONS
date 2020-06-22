@@ -9,3 +9,15 @@ def displayInventory(inventory):
     print("Total number of items: {}".format(sum))
 
 displayInventory(eq)
+
+dragonLoot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby', 'sword', 'gold coin', 'gold coin', 'gold coin']
+
+def addToInventory(inventory, addedItems):
+    for item in addedItems:
+        if item in inventory:
+            inventory[item]+=1
+        else:
+            inventory.setdefault(item, 1)
+
+addToInventory(eq, dragonLoot)
+displayInventory(eq)
