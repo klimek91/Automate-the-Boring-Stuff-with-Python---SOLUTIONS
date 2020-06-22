@@ -27,6 +27,9 @@ for i in range(9):
     while spot not in board.keys():
         print("You choose wrong spot, please try again")
         spot = input()
+    while board[spot] != ' ':
+        print("This spot is already taken, pleasy try again")
+        spot = input()
     if spot in board.keys():
         board[spot] = turn
         if turn == "X":
