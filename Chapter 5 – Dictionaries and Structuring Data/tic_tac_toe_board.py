@@ -24,9 +24,14 @@ for i in range(9):
     printBoard(board)
     print("Turn no. {} player {}".format(i+1, turn))
     spot = input("Choose Your spot: ")
-    board[spot] = turn
-    if turn == "X":
-        turn = "O"
-    else:
-        turn = "X"
+    while spot not in board.keys():
+        print("You choose wrong spot, please try again")
+        spot = input()
+    if spot in board.keys():
+        board[spot] = turn
+        if turn == "X":
+            turn = "O"
+        else:
+            turn = "X"
+
 
