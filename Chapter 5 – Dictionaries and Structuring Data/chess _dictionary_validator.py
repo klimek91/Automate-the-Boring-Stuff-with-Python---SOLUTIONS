@@ -1,18 +1,13 @@
 dict = {'1h': 'bking', '6c': 'wqueen', '2g': 'bbishop', '5h': 'bqueen', '3e': 'wking',
         '1h': 'bking','2h': 'bking','3h': 'bking','4h': 'bking','5h': 'bking','6h': 'bking',
-        '1f': 'bking','1a': 'bking', '1d': 'bking', '1h': 'bking', '7h': 'bking', '10h': 'bking',
-        '1h': 'bking', '1b': 'bking', '1c': 'bking', '1h': 'bking', '8h': 'bking', '9h': 'bking'}
-
-
-print(dict.values())
-print(dict.keys())
-print(len(dict.values()))
-
+        '7h': 'bking', '6h': 'bking',
+        '1h': 'bking', '1b': 'bking', '1c': 'bking', '1h': 'bking', '8h': 'bking'}
 
 def isValidChessBoard(dictionary):
+    #kings
     if 'bking' not in dictionary.values() or 'wking' not in dictionary.values():
-        print('false')
         return False
+    #no more then 16 pieces each
     countb = 0
     countw = 0
     for value in dictionary.values():
@@ -21,7 +16,15 @@ def isValidChessBoard(dictionary):
         if value.startswith('w'):
             countw += 1
     if countb >= 16 or countw >= 16:
-        print('false')
+        return False
+    #only spots from 1a to 8h
+    list = []
+    for i in range(1, 9):
+        for letter in ('abcdefgh'):
+            list.append(str(i) + letter)
+    for key in dictionary.keys():
+        if key not in list:
+            return False
 
 
 isValidChessBoard(dict)
