@@ -18,3 +18,27 @@ for word in words:
     while len(word) > 0 and not word[-1].isalpha():
         sufixNonLetters += word[-1]
         word = word[:-1]
+
+    wasUpper = word.isupper()
+    wasTitle = word.istitle()
+
+    word = word.lower()
+
+    prefixConsonants = ''
+    while len(word)>0 and word[0] not in vowels:
+        prefixConsonants += word[0]
+        word = word[1:]
+
+    if prefixConsonants !='':
+        word+=prefixConsonants + 'ay'
+    else:
+        word+= 'yay'
+
+    if wasUpper:
+        word = word.upper()
+    if wasTitle:
+        word = word.title()
+
+    pigLatina.append(prefixNonLetters + word + sufixNonLetters)
+
+print(' '.join(pigLatina))
