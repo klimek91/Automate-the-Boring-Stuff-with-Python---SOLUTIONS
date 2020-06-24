@@ -25,19 +25,22 @@ for keys in capitals:
     states.append((keys))
 
 
-for i in range(2):
+for i in range(35):
     file = open(path + '\quiz{}.txt'.format(i+1), 'w')
     file.write("Quiz number {}".format(i+1))
     file.write("\nName:\nSurname:\nClass:\nDate:\n")
 
     random.shuffle(states)
-    for x in range(2):
+    for x in range(50):
         file.write("\n{}. What is capital of {}?\n".format(x+1,states[x]))
         good_answer = capitals[states[x]]
         wrongAnswers = list(capitals.values())
         del wrongAnswers[wrongAnswers.index(good_answer)]
         other_answers = random.sample(wrongAnswers,3)
-        print(other_answers)
-        print(good_answer)
         answers = other_answers + [good_answer]
         random.shuffle(answers)
+        for y in range(4):
+            file.write("{}. {}\n".format('ABCD'[y], answers[y]))
+            if answers[y] == good_answer:
+                answer = open(path + '\quiz{}_answer.txt'.format(i+1), 'a')
+                answer.write("{}. {} {}\n".format(x+1,'ABCD'[y],good_answer))
