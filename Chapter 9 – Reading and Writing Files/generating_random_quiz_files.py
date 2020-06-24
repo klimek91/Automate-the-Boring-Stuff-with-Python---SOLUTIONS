@@ -1,4 +1,10 @@
 import random, os
+#1 Creates 35 different quizzes
+#2 Creates 50 multiple-choice questions for each quiz, in random order
+#3 Provides the correct answer and three random wrong answers for each question, in random order
+#4 Writes the quizzes to 35 text files
+#5 Writes the answer keys to 35 text files
+
 capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
    'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado': 'Denver',
    'Connecticut': 'Hartford', 'Delaware': 'Dover', 'Florida': 'Tallahassee',
@@ -24,13 +30,15 @@ states = []
 for keys in capitals:
     states.append((keys))
 
-
+#35 random quizes
 for i in range(35):
     file = open(path + '\quiz{}.txt'.format(i+1), 'w')
     file.write("Quiz number {}".format(i+1))
     file.write("\nName:\nSurname:\nClass:\nDate:\n")
 
     random.shuffle(states)
+
+    #50 random questions
     for x in range(50):
         file.write("\n{}. What is capital of {}?\n".format(x+1,states[x]))
         good_answer = capitals[states[x]]
@@ -39,8 +47,10 @@ for i in range(35):
         other_answers = random.sample(wrongAnswers,3)
         answers = other_answers + [good_answer]
         random.shuffle(answers)
+
+        #4 possibilities to each question
         for y in range(4):
             file.write("{}. {}\n".format('ABCD'[y], answers[y]))
-            if answers[y] == good_answer:
+            if answers[y] == good_answer:  #answer file
                 answer = open(path + '\quiz{}_answer.txt'.format(i+1), 'a')
                 answer.write("{}. {} {}\n".format(x+1,'ABCD'[y],good_answer))
