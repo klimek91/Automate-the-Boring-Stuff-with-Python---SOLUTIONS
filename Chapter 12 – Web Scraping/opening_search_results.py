@@ -1,4 +1,4 @@
-import requests, bs4
+import requests, bs4, webbrowser
 
 link = "https://www.google.pl/search?&q=adam+malysz"
 
@@ -9,4 +9,6 @@ res.raise_for_status()
 
 soup = bs4.BeautifulSoup(res.text, 'lxml')
 linkEl = soup.select(".r > a[href]")
-print(linkEl)
+
+for i in range(3):
+    webbrowser.open(linkEl[i].attrs['href'])
