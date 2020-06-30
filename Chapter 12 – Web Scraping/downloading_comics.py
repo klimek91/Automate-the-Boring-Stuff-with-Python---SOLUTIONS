@@ -19,11 +19,15 @@ while not url.endswith('/2300/'): #downloading only few images (You can change t
     resIm.raise_for_status()
     imgName = os.path.basename(img)
 
-    print("Downloading {} ..".format(imgName))
-    file = open(os.path.join('xkcd',imgName), 'wb')
-    for chunk in resIm.iter_content(100000):
-        file.write(chunk)
-    file.close()
+    if not os.path.exists(os.path.join('xkcd', imgName)):
+        print("Downloading {} ..".format(imgName))
+        file = open(os.path.join('xkcd',imgName), 'wb')
+        for chunk in resIm.iter_content(100000):
+            file.write(chunk)
+        file.close()
+    else:
+        print("Comics database is updated")
+        break
 
     prevEl = soup.select('a[rel = "prev"]')
     prevButton = prevEl[0].attrs['href']
