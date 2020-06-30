@@ -13,11 +13,15 @@ imgEl = soup.select('#comic >img')
 img = imgEl[0].attrs['src']
 imgUrl = "https:" + img
 
-res = requests.get(imgUrl, headers=headers)
-res.raise_for_status()
+resIm = requests.get(imgUrl, headers=headers)
+resIm.raise_for_status()
 imgName = os.path.basename(img)
 
 file = open(os.path.join('xkcd',imgName), 'wb')
-for chunk in res.iter_content(100000):
+for chunk in resIm.iter_content(100000):
     file.write(chunk)
 file.close()
+
+prevEl = soup.select('a[rel = "prev"]')
+prevButton = prevEl[0].attrs['href']
+prevUrl = 'https://xkcd.com/' + prevButton
