@@ -6,15 +6,15 @@
 
 import openpyxl, pprint
 
-sheet = openpyxl.load_workbook('censuspopdata.xlsx')
-wb = sheet.active
+wb = openpyxl.load_workbook('censuspopdata.xlsx')
+sheet = wb.active
 
 state = {}
 
-for i in range(2, wb.max_row+1):
-    state_name = wb['B'+str(i)].value
-    county_name = wb['C'+str(i)].value
-    pop = wb["D"+str(i)].value
+for i in range(2, sheet.max_row+1):
+    state_name = sheet['B'+str(i)].value
+    county_name = sheet['C'+str(i)].value
+    pop = sheet["D"+str(i)].value
 
     state.setdefault(state_name, {})
     state[state_name].setdefault(county_name, {'count':0, 'pop':0})
