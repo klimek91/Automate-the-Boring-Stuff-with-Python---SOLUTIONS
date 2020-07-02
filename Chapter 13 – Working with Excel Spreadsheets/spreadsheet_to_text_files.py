@@ -6,14 +6,7 @@ sheet = wb.active
 
 for row in range(sheet.max_row):
     for col in range(sheet.max_column):
+        if sheet[get_column_letter(col+1) + str(row+1)].value is None:
+            continue
         file = open('text{}.txt'.format(col), 'a')
-        file.write(str(sheet[get_column_letter(col+1) + str(row+1)].value))
-
-
-
-
-
-
-#for row in range(sheet.max_row):
-#    file = open('textFromExcel01.txt', 'a')
-#    file.write(sheet['A'+str(row+1)].value)
+        file.write(str(sheet[get_column_letter(col+1) + str(row+1)].value) + '\n')
