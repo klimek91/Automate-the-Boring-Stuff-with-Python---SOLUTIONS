@@ -8,10 +8,15 @@ lines2 = file2.readlines()
 wb = openpyxl.Workbook()
 sheet = wb.active
 
+
 for row in range(len(lines1)):
         sheet['A'+str(row+1)].value = lines1[row]
+        if sheet.column_dimensions['A'].width < len(lines1[row]):
+                sheet.column_dimensions['A'].width = len(lines1[row])
 
 for row in range(len(lines2)):
         sheet['B'+str(row+1)].value = lines2[row]
+        if sheet.column_dimensions['B'].width < len(lines2[row]):
+                sheet.column_dimensions['B'].width = len(lines2[row])
 
 wb.save("textToExcel.xlsx")
