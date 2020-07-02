@@ -1,22 +1,20 @@
 import openpyxl, os
+from openpyxl.utils import get_column_letter
 
-file1= open('text.txt')
-lines1 = file1.readlines()
-file2 = open('text2.txt')
-lines2 = file2.readlines()
+files = []  # text files in current dir
+for file in os.listdir(os.getcwd()):
+    if file.endswith('.txt'):
+        files.append(file)
 
 wb = openpyxl.Workbook()
 sheet = wb.active
 
-
-for row in range(len(lines1)):
-        sheet['A'+str(row+1)].value = lines1[row]
-        if sheet.column_dimensions['A'].width < len(lines1[row]):
-                sheet.column_dimensions['A'].width = len(lines1[row])
-
-for row in range(len(lines2)):
-        sheet['B'+str(row+1)].value = lines2[row]
-        if sheet.column_dimensions['B'].width < len(lines2[row]):
-                sheet.column_dimensions['B'].width = len(lines2[row])
+for file in files:
+    text = open(file)
+    lines = text.readlines()
+    for row in range(len(lines)):
+        sheet[get_column_letter(files.index(file)+1)+str(row+1)].value = lines[row]
+        if sheet.column_dimensions[get_column_letter(files.index(file)+1)].width < len(lines[row]):
+            sheet.column_dimensions[get_column_letter(files.index(file) + 1)].width = len(lines[row])
 
 wb.save("textToExcel.xlsx")
