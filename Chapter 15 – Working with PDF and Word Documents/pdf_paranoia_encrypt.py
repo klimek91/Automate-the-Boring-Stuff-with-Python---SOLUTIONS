@@ -1,4 +1,6 @@
-import os, PyPDF2
+import os, PyPDF2, send2trash
+
+password = input("Enter password for pdf files: ")
 
 for mainfolder, subfolders, filenames in os.walk(os.getcwd()):
     for pdf in filenames:
@@ -12,10 +14,10 @@ for mainfolder, subfolders, filenames in os.walk(os.getcwd()):
                 pageObj = pdfReader.getPage(numPage)
                 pdfWriter.addPage(pageObj)
 
-
+            pdfWriter.encrypt(password)
             print("Encrypting {}.. ".format(filename))
-            pdfWriter.encrypt("password")
             resultPdf = open(filename.replace('.pdf','_encrypted.pdf'), 'wb')
             pdfWriter.write(resultPdf)
             resultPdf.close()
             pdfFile.close()
+            send2trash.send2trash(filename)
