@@ -1,4 +1,4 @@
-import os, requests, bs4
+import os, requests, bs4, threading
 
 os.makedirs('xkcd', exist_ok=True)
 headers = {'User-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'}
@@ -22,4 +22,10 @@ def downloadXKCD(firstNumber, lastNumber):
             imgFile.write(chunk)
         imgFile.close()
 
-downloadXKCD(2000,2010)
+downloadThreads = []
+for i in range(1,101,10):   #10 threads, 10 comics downloaded per thread
+    start = 1
+    end = i+10
+    thread = threading.Thread(target=downloadXKCD, args=(start,end))
+    downloadThreads.append(thread)
+    thread.start()
