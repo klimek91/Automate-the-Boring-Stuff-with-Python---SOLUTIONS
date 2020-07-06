@@ -5,3 +5,10 @@ for file in os.listdir(os.getcwd()):
         csvFile = open(file)
         csvData = list(csv.reader(csvFile))
         newData = csvData[1:]
+
+        outputFile = open(file.replace('.csv','_new.csv'),'w', newline='')
+        outputWriter = csv.writer(outputFile)
+        for row in newData:
+            outputWriter.writerow(row)
+        outputFile.close()
+        csvFile.close()
