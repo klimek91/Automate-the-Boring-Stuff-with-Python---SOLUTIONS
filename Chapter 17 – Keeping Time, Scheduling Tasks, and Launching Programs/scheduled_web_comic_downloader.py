@@ -20,12 +20,13 @@ while True:
     imgEl = soup.select(".comicimage")
     imgUrl = imgEl[0].attrs['src']
     imgName = os.path.basename(imgUrl)
-    img = open(os.path.join('comic', imgName), 'wb')
-    for chunk in resImg.iter_content(100000):
-        img.write(chunk)
-    img.close()
-    mainUrl = str(int(mainUrl) - 1)
-
-
-
-
+    if not os.path.exists(os.path.join('comic',imgName)):
+        print("Downloading {}..".format(imgName))
+        img = open(os.path.join('comic', imgName), 'wb')
+        for chunk in resImg.iter_content(100000):
+            img.write(chunk)
+        img.close()
+        mainUrl = str(int(mainUrl) - 1)
+    else:
+        print("Database is updated")
+        break
