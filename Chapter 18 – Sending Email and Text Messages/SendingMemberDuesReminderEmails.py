@@ -13,6 +13,10 @@ for col in range(1,sheet.max_column+1):
             dues[sheet['A'+str(row)].value].setdefault(sheet['B'+str(row)].value, [])
             dues[sheet['A' + str(row)].value][sheet['B'+str(row)].value].append(sheet[get_column_letter(col) + "1"].value)
 
-            #print(sheet[get_column_letter(col) + str(row)])
+email = input("Please enter Your email address: ")
+password = input("Please enter Your password: ")
 
-print(dues)
+smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+smtpObj.ehlo()
+smtpObj.starttls()
+smtpObj.login(email, password)
