@@ -4,7 +4,7 @@
 import os
 from PIL import Image
 
-for mainfolder, subfolders, filenames in os.walk(r"C:\Users\klimk\Desktop\MOJE"):
+for mainfolder, subfolders, filenames in os.walk(r"C:\\"):
     no_image = []
     images = []
     for filename in filenames:
@@ -15,4 +15,6 @@ for mainfolder, subfolders, filenames in os.walk(r"C:\Users\klimk\Desktop\MOJE")
                 images.append(filename)
         else:
             no_image.append(filename)
-    print("No images file: {}, image files: {} in {}".format(len(no_image), len(images), mainfolder))
+
+    if len(images) > len(no_image):
+        print("This is image file {} with {} images and {} no-images".format(mainfolder, len(images), len(no_image)))
