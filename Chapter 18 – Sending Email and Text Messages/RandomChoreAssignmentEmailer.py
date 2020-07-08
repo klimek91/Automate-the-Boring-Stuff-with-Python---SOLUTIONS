@@ -12,5 +12,6 @@ for col in range(1,3):
         name = sheet['A'+str(row)].value
         email = sheet['B'+str(row)].value
         to_do.setdefault(name, {})
-        to_do[name].setdefault(email, [])
+        to_do[name].setdefault('email', email)
+        to_do[name].setdefault('chores', [])
 
