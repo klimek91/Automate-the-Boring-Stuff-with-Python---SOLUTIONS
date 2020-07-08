@@ -15,3 +15,7 @@ for col in range(1,3):
         to_do[name].setdefault('email', email)
         to_do[name].setdefault('chores', [])
 
+for person in to_do:
+    chore = random.choice(chores)
+    chores.remove(chore)
+    to_do[person]['chores'] = chore
