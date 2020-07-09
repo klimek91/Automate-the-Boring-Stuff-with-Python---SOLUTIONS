@@ -2,8 +2,14 @@
 # opera size 1920x1080 size 125%
 
 import pyautogui as pyg
-import time
+import time, os
+from PIL import ImageGrab
+
+os.makedirs('snap', exist_ok=True)
 #pyg.mouseInfo()
+
+x_pad = 450
+y_pad = 226
 
 foodOnHand = {'shrimp':5,
               'rice':10,
@@ -11,6 +17,12 @@ foodOnHand = {'shrimp':5,
               'roe':10,
               'salmon':5,
               'unagi':5}
+
+def screenGrab():
+    box = (x_pad + 1, y_pad + 1, x_pad + 1001, y_pad + 747)
+    im = ImageGrab.grab()
+    im.save(os.path.join('snap', 'snap'+str(int(time.time())) + '.png'), 'PNG')
+    return im
 
 def startgame():
     pyg.click(939,547, duration=0.1)
@@ -84,3 +96,68 @@ def makeFood(food):
         time.sleep(0.1)
         pyg.click(Cord.fold_mat)
         time.sleep(1.5)
+
+def buyFood(food):
+    if food == 'rice':
+        pyg.click(Cord.phone)
+        time.sleep(0.1)
+        pyg.click(Cord.menu_rice)
+        time.sleep(0.1)
+        s = screenGrab()
+        if s.getpixel(Cord.buy_rice) != (127, 127, 127):
+            time.sleep(0.1)
+            print("Rice is available")
+            time.sleep(0.1)
+            pyg.click(Cord.buy_rice)
+            time.sleep(0.1)
+            pyg.click(Cord.delivery_norm)
+            foodOnHand['rice']+=10
+            time.sleep(2.5)
+        else:
+            print("No cash for rice")
+            pyg.click(Cord.t_exit)
+            time.sleep(1)
+            buyFood(food)
+
+    if food == 'nori':
+        pyg.click(Cord.phone)
+        time.sleep(0.1)
+        pyg.click(Cord.menu_toppings)
+        time.sleep(0.1)
+        s = screenGrab()
+        time.sleep(0.1)
+        if s.getpixel(Cord.t_nori) != (53, 53, 39):
+            time.sleep(0.1)
+            print('Nori is available')
+            time.sleep(0.1)
+            pyg.click(Cord.t_nori)
+            time.sleep(0.1)
+            pyg.click(Cord.delivery_norm)
+            foodOnHand['nori'] += 10
+            time.sleep(1)
+        else:
+            print("No cash for nori")
+            pyg.click(Cord.t_exit)
+            time.sleep(1)
+            buyFood(food)
+    if food == 'roe':
+        pyg.click(Cord.phone)
+        time.sleep(0.1)
+        pyg.click(Cord.menu_toppings)
+        time.sleep(0.1)
+        s = screenGrab()
+        time.sleep(0.1)
+        if s.getpixel(Cord.t_roe) != (101, 13, 13):
+            time.sleep(0.1)
+            print('Roe is available')
+            time.sleep(0.1)
+            pyg.click(Cord.t_roe)
+            time.sleep(0.1)
+            pyg.click(Cord.delivery_norm)
+            foodOnHand['roe'] += 10
+            time.sleep(1)
+        else:
+            print("No cash for roe")
+            pyg.click(Cord.t_exit)
+            time.sleep(1)
+            buyFood(food)
