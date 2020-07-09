@@ -261,3 +261,19 @@ def sushiType(number):
         return 'caliroll'
     if number in gunkan:
         return 'gunkan'
+
+def checkFood():
+    for i,j in foodOnHand.items():
+        if i == 'nori' or i == 'rice' or i == 'roe':
+            if j <= 4:
+                print("{} is low and need to restock".format(i))
+                buyFood(i)
+
+def clear_tables():
+    pyg.click(591,556)
+    pyg.click(759,550)
+    pyg.click(912,553)
+    pyg.click(1069,554)
+    pyg.click(1226,557)
+    pyg.click(1386,555)
+    time.sleep(0.1)
