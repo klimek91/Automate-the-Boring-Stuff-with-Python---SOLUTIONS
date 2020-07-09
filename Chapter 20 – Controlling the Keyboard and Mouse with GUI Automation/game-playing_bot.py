@@ -25,7 +25,7 @@ def screenGrab():
     im.save(os.path.join('snap', 'snap'+str(int(time.time())) + '.png'), 'PNG')
     return im
 
-def startgame():
+def startGame():
     pyg.click(939,547, duration=0.1)
     pyg.click(918,836, duration=0.1)
     pyg.click(1367,933, duration=0.1)
@@ -184,7 +184,7 @@ def get_seat_one():
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = array(im.getcolors())
     a = a.sum()
-    im.save(os.getcwd() + '\\seat_one__' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.path.join('snap', 'seat_one_'+str(int(time.time())) + '.png'), 'PNG')
     return a
 
 
@@ -193,7 +193,7 @@ def get_seat_two():
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = array(im.getcolors())
     a = a.sum()
-    im.save(os.getcwd() + '\\seat_two__' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.path.join('snap', 'seat_two_' + str(int(time.time())) + '.png'), 'PNG')
     return a
 
 
@@ -202,7 +202,7 @@ def get_seat_three():
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = array(im.getcolors())
     a = a.sum()
-    im.save(os.getcwd() + '\\seat_three__' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.path.join('snap', 'seat_three_' + str(int(time.time())) + '.png'), 'PNG')
     return a
 
 
@@ -211,7 +211,7 @@ def get_seat_four():
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = array(im.getcolors())
     a = a.sum()
-    im.save(os.getcwd() + '\\seat_four__' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.path.join('snap', 'seat_four_' + str(int(time.time())) + '.png'), 'PNG')
     return a
 
 
@@ -220,7 +220,7 @@ def get_seat_five():
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = array(im.getcolors())
     a = a.sum()
-    im.save(os.getcwd() + '\\seat_five__' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.path.join('snap', 'seat_five_' + str(int(time.time())) + '.png'), 'PNG')
     return a
 
 
@@ -229,7 +229,7 @@ def get_seat_six():
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = array(im.getcolors())
     a = a.sum()
-    im.save(os.getcwd() + '\\seat_six__' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.path.join('snap', 'seat_six_' + str(int(time.time())) + '.png'), 'PNG')
     return a
 
 
@@ -277,3 +277,87 @@ def clear_tables():
     pyg.click(1226,557)
     pyg.click(1386,555)
     time.sleep(0.1)
+
+class Blank:
+    seat_1 = 10495
+    seat_2 = 12478
+    seat_3 = 12999
+    seat_4 = 12713
+    seat_5 = 13223
+    seat_6 = 12206
+
+def check_bubs():
+
+    checkFood()
+    s1 = get_seat_one()
+    if s1 != Blank.seat_1:
+        sushiType(s1)
+        print('table 1 is occupied and needs %s' % sushiType(s1))
+        makeFood(sushiType(s1))
+    else:
+        print('Table 1 unoccupied')
+    clear_tables()
+    checkFood()
+
+    checkFood()
+    s2 = get_seat_two()
+    if s2 != Blank.seat_2:
+        sushiType(s2)
+        print('table 2 is occupied and needs %s' % sushiType(s2))
+        makeFood(sushiType(s2))
+    else:
+        print('Table 2 unoccupied')
+    clear_tables()
+    checkFood()
+
+    checkFood()
+    s3 = get_seat_three()
+    if s3 != Blank.seat_3:
+        sushiType(s3)
+        print('table 3 is occupied and needs %s' % sushiType(s3))
+        makeFood(sushiType(s3))
+    else:
+        print('Table 3 unoccupied')
+    clear_tables()
+    checkFood()
+
+    checkFood()
+    s4 = get_seat_four()
+    if s4 != Blank.seat_4:
+        sushiType(s4)
+        print('table 4 is occupied and needs %s' % sushiType(s4))
+        makeFood(sushiType(s4))
+    else:
+        print('Table 4 unoccupied')
+    clear_tables()
+    checkFood()
+
+    checkFood()
+    s5 = get_seat_five()
+    if s5 != Blank.seat_5:
+        sushiType(s5)
+        print('table 5 is occupied and needs %s' % sushiType(s5))
+        makeFood(sushiType(s5))
+    else:
+        print('Table 5 unoccupied')
+    clear_tables()
+    checkFood()
+
+    checkFood()
+    s6 = get_seat_six()
+    if s6 != Blank.seat_6:
+        sushiType(s6)
+        print('table 6 is occupied and needs %s' % sushiType(s6))
+        makeFood(sushiType(s6))
+    else:
+        print('Table 6 unoccupied')
+    clear_tables()
+
+
+def main():
+    startGame()
+    while True:
+        check_bubs()
+
+if __name__ == '__main__':
+    main()
