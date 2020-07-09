@@ -3,7 +3,8 @@
 
 import pyautogui as pyg
 import time, os
-from PIL import ImageGrab
+from PIL import ImageGrab, ImageOps
+from numpy import *
 
 os.makedirs('snap', exist_ok=True)
 #pyg.mouseInfo()
@@ -161,3 +162,102 @@ def buyFood(food):
             pyg.click(Cord.t_exit)
             time.sleep(1)
             buyFood(food)
+
+def grab():
+    box = (x_pad + 1, y_pad + 1, x_pad + 1001, y_pad + 747)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolor())
+    a = a.sum()
+    return im
+
+x1 = 508
+x2 = 666
+x3 = 824
+x4 = 981
+x5 = 1139
+x6 = 1297
+y1 = 307
+y2 = 357
+
+def get_seat_one():
+    box = (x1, y1, x1+61, y2)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolors())
+    a = a.sum()
+    im.save(os.getcwd() + '\\seat_one__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_seat_two():
+    box = (x2,y1, x2+61,y2)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolors())
+    a = a.sum()
+    im.save(os.getcwd() + '\\seat_two__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_seat_three():
+    box = (x3,y1,x3+61,y2)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolors())
+    a = a.sum()
+    im.save(os.getcwd() + '\\seat_three__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_seat_four():
+    box = (x4,y1,x4+61,y2)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolors())
+    a = a.sum()
+    im.save(os.getcwd() + '\\seat_four__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_seat_five():
+    box = (x5,y1,x5+61,y2)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolors())
+    a = a.sum()
+    im.save(os.getcwd() + '\\seat_five__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_seat_six():
+    box = (x6,y1,x6+61,y2)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    a = array(im.getcolors())
+    a = a.sum()
+    im.save(os.getcwd() + '\\seat_six__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_all_seats():
+    print(get_seat_one() , ' seat one')
+    print(get_seat_two(), ' seat two')
+    print(get_seat_three(), ' seat three')
+    print(get_seat_four(), ' seat foure')
+    print(get_seat_five(), ' seat five ')
+    print(get_seat_six(), ' seat six')
+
+onigiri = []
+caliroll = []
+gunkan = []
+
+for i in range(3850,4110):
+    onigiri.append(i)
+
+for i in range(4450,5100):
+    caliroll.append(i)
+
+for i in range(4120,4400):
+    gunkan.append(i)
+
+def sushiType(number):
+    if number in onigiri:
+        return 'onigiri'
+    if number in caliroll:
+        return 'caliroll'
+    if number in gunkan:
+        return 'gunkan'
